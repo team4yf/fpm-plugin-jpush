@@ -1,6 +1,16 @@
 import _ from 'lodash'
 import { JPushAsync as JPush } from 'jpush-async'
 
+const E = {
+  JPush: {
+    PUSH_ERROR: {
+      errno: -10021, 
+      code: 'PUSH_ERROR', 
+      message: 'push error'
+    }
+  }
+}
+
 const push = (client, options) => {
   const pusher = client.push()
     .setPlatform(JPush.ALL)
@@ -31,22 +41,25 @@ export default {
       client = JPush.buildClient( c.appkey, c.secretkey )
     })
 
+    const bizModule = {
+      push: async (args) => {
+        return new Promise( (rs, rj) => {
+          push(client, args)
+            .then(result=>{
+              rs({data: result})
+            })
+            .catch(e => {
+              rj(_.assign(E.JPush.PUSH_ERROR, { error: e }))
+            })
+        })
+      }
+    }
+
     fpm.registerAction('BEFORE_SERVER_START', () => {
-      fpm.extendModule('jpush', {
-        push: async (args) => {
-          return new Promise( (rs, rj) => {
-            push(client, args)
-              .then(result=>{
-                rs({data: result})
-              })
-              .catch(e => {
-                rj({error: e})
-              })
-          })
-        }
-      })
+      fpm.extendModule('jpush', bizModule)
       
     })
 
+    return bizModule
   }
 }

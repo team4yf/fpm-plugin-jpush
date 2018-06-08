@@ -1,6 +1,6 @@
 {
   "name": "fpm-plugin-jpush",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A Plugin Named [fpm-plugin-jpush] For YF-FPM-SERVER~",
   "main": "lib/index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "nodemon": "^1.11.0",
-    "yf-fpm-client-js": "^1.0.1",
-    "yf-fpm-server": "^2.4.6"
+    "yf-fpm-client-js": "^1.0.2",
+    "yf-fpm-server": "^2.4.11"
   }
 }
