@@ -48,10 +48,10 @@ export default {
           push(client, args)
             .then(result=>{
               // record the push info
-              dataset.push(_.assign( args, { createAt: _.now() }))
-              if( dataset.lenght > 100){
-                // delete the element of the head node
-                dataset.shift()
+              const length = dataset.unshift(_.assign( args, { createAt: _.now() }))
+              if( length > 100){
+                // delete the element of the last node
+                dataset.pop()
               }
               rs({data: result})
             })

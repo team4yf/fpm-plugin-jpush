@@ -1,6 +1,6 @@
 {
   "name": "fpm-plugin-jpush",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A Plugin Named [fpm-plugin-jpush] For YF-FPM-SERVER~",
   "main": "lib/index.js",
   "scripts": {
